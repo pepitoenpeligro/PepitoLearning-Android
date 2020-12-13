@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dss.pepitolearning.R;
+import com.dss.pepitolearning.api.APIProductGet;
 
 public class OtroFragment extends Fragment {
 
@@ -24,6 +26,24 @@ public class OtroFragment extends Fragment {
                 new ViewModelProvider(this).get(OtroViewModel.class);
         View root = inflater.inflate(R.layout.fragment_otro, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
+
+        Button btn_getproducts = root.findViewById(R.id.btn_api_getproducts);
+
+        btn_getproducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                APIProductGet p = new APIProductGet();
+                p.setActivity(getActivity());
+                p.execute();
+            }
+        });
+
+
+
+
+
+
+
         otroViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
