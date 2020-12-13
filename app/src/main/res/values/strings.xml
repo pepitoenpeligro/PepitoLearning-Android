@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PepitoLearning</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">José Antonio</string>
+    <string name="nav_header_subtitle">joseinn@correo.ugr.es</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_admin_testing">Admin Testing</string>
+    <string name="menu_otro">Others</string>
+</resources>
