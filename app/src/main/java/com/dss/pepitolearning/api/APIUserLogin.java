@@ -164,6 +164,8 @@ public class APIUserLogin extends AsyncTask<Void, Void, Void> {
                         animation_popup.setVisibility(View.GONE);
                         mDialog.hide();
                         Intent goToHome = new Intent(activity, NavigationDrawerActivity.class);
+
+                        goToHome.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         activity.startActivity(goToHome);
 
                     }
