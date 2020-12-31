@@ -65,6 +65,7 @@
         android:ems="10"
         android:hint="user@email.com"
         android:inputType="textEmailAddress"
+        android:text="joseant.cg@outlook.com"
         app:layout_constraintBottom_toTopOf="@+id/et_pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

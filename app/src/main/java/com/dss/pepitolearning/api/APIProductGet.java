@@ -36,7 +36,6 @@ public class APIProductGet extends AsyncTask<Void, Void, Void> {
     public void setActivity(Activity activity){
         this.activity = activity;
     }
-
     @Override
     protected Void doInBackground(Void... voids) {
         try{
@@ -73,4 +72,5 @@ public class APIProductGet extends AsyncTask<Void, Void, Void> {
         // por si hay que meter progress dialogs
         // o reaccionar en listeners o adapters
     }
+
 }

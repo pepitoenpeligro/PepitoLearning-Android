@@ -2,9 +2,13 @@ package com.dss.pepitolearning.ui.auth;
 
 
 import android.animation.Animator;
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -21,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
 import com.dss.pepitolearning.R;
+import com.dss.pepitolearning.api.APIProductGet;
+import com.dss.pepitolearning.api.APIUserLogin;
 
 public class AuthenticationActivity extends AppCompatActivity {
 
@@ -55,6 +61,10 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     public void initUI(){
         hideActionBar();
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(this.getResources().getColor(R.color.button_color));
 
         this.btnSingIn = findViewById(R.id.btn_signin);
         this.btnSingUp = findViewById(R.id.btn_singup);
@@ -93,6 +103,9 @@ public class AuthenticationActivity extends AppCompatActivity {
         Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
         this.gorrito.startAnimation(slideDown);
 
+        //Dialog mDialog = new Dialog(this);
+        //mDialog.setContentView(R.layout.popup);
+
         this.btnSingIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,8 +116,46 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                 Log.d("AuthenticationActivity", email + pass);
 
-                check.setVisibility(View.VISIBLE);
-                check.playAnimation();
+                APIUserLogin login = new APIUserLogin(email, pass);
+                //login.setActivity(getApplicationContext().);
+                login.setActivity((Activity) view.getContext());
+                login.execute();
+
+
+               /* LottieAnimationView animacionCorrecta = (LottieAnimationView) mDialog.findViewById(R.id.animationcheck);
+
+                mDialog.show();
+
+                animacionCorrecta.setVisibility(View.VISIBLE);
+                animacionCorrecta.playAnimation();
+
+                animacionCorrecta.addAnimatorListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
+                        animacionCorrecta.setVisibility(View.VISIBLE);
+                        mDialog.show();
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        animacionCorrecta.setVisibility(View.GONE);
+                        mDialog.hide();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+
+                    }
+                });*/
+
+
+                //check.setVisibility(View.VISIBLE);
+                //check.playAnimation();
             }
         });
     }
