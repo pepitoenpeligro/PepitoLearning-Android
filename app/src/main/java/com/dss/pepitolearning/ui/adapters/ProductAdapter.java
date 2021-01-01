@@ -115,7 +115,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
                 Pair[] pairs = new Pair[1];
                 pairs[0] = new Pair<View,String>(holder.animacion,"latransicion");
 
-                ActivityOptions op = ActivityOptions.makeSceneTransitionAnimation((Activity) context, pairs);
+                Activity actividad = (Activity) context;
+                ActivityOptions op = ActivityOptions.makeSceneTransitionAnimation(actividad, pairs);
 
 
                 context.startActivity(goToOneProductDescription,op.toBundle());

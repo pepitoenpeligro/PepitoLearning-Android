@@ -60,22 +60,16 @@ public class OneProductActivity extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("me ha tocao");
-                //((Activity)getApplicationContext()).finishActivity(0);
-                finish();
-
+                ((Activity)view.getContext()).onBackPressed();
             }
         });
 
         LottieAnimationView header = findViewById(R.id.iv_one_product_back_animation);
         courseRecyclerView = findViewById(R.id.course_recycler);
 
-        // Necesito obtener el nombre de la animacion de la actividad anterior
         LottieCompositionFactory.fromAsset(getApplicationContext(), animationFileName).addListener(new LottieListener<LottieComposition>() {
             @Override
             public void onResult(LottieComposition result) {
-
-
 
                 header.setComposition(result);
                 header.setVisibility(View.VISIBLE);
@@ -104,7 +98,6 @@ public class OneProductActivity extends AppCompatActivity {
 
                     }
                 });
-
 
             }
         });
