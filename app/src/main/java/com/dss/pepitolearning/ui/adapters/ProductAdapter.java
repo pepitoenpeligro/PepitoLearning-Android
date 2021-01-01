@@ -17,7 +17,7 @@ import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieCompositionFactory;
 
 import com.airbnb.lottie.LottieListener;
-import com.dss.pepitolearning.CoursePage;
+import com.dss.pepitolearning.OneProductActivity;
 import com.dss.pepitolearning.R;
 import com.dss.pepitolearning.models.Category;
 
@@ -103,8 +103,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(context, CoursePage.class);
-                context.startActivity(i);
+                Intent goToOneProductDescription = new Intent(context, OneProductActivity.class);
+                System.out.println("Le paso a la siguiente actividad:");
+                System.out.println(categoryList.get(position).getImage());
+                goToOneProductDescription.putExtra("animation_file_name",  categoryList.get(position).getImage());
+                goToOneProductDescription.putExtra("product_parcelable",  categoryList.get(position));
+                context.startActivity(goToOneProductDescription);
 
             }
         });

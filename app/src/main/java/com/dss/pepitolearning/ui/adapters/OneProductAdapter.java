@@ -1,5 +1,6 @@
 package com.dss.pepitolearning.ui.adapters;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieComposition;
+import com.airbnb.lottie.LottieCompositionFactory;
+import com.airbnb.lottie.LottieListener;
 import com.dss.pepitolearning.R;
 import com.dss.pepitolearning.models.PlayList;
 
@@ -41,6 +46,8 @@ public class OneProductAdapter extends RecyclerView.Adapter<OneProductAdapter.Co
         holder.contentTime.setText(playLists.get(position).getTime());
         holder.contentName.setText(playLists.get(position).getName());
 
+
+
     }
 
     @Override
@@ -60,6 +67,7 @@ public class OneProductAdapter extends RecyclerView.Adapter<OneProductAdapter.Co
             contentName = itemView.findViewById(R.id.content_title);
             contentTime = itemView.findViewById(R.id.content_time);
             contentNumber = itemView.findViewById(R.id.content_number);
+
 
         }
     }

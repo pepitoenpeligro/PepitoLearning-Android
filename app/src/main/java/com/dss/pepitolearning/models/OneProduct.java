@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Course {
+public class OneProduct {
 
     @SerializedName("courseName")
     @Expose
@@ -26,6 +26,18 @@ public class Course {
     @SerializedName("playList")
     @Expose
     private List<PlayList> playList = null;
+
+    @SerializedName("image")
+    @Expose
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 
     public String getCourseName() {
         return courseName;
