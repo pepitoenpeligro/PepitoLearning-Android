@@ -145,49 +145,55 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             app:layout_constraintVertical_bias="0.0" />
 
+
+
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="0dp"
-            android:layout_height="75dp"
+            android:layout_height="90dp"
             android:background="@drawable/buy_layout_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            >
 
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="47dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView6"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_shopping_bag" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/add_to_cart_animation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="204dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/buy_button_bg"
-                android:gravity="center"
-                android:text="Buy Now"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
+
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:scaleX="2.40"
+                android:scaleY="2.40"
+
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView10"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:lottie_autoPlay="true"
+
+                app:lottie_fileName="lf30_editor_fhze2wcc.json"
+                app:lottie_loop="true"
+
+                >
+
+
+
+
+            </com.airbnb.lottie.LottieAnimationView>
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

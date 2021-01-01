@@ -2,7 +2,9 @@ package com.dss.pepitolearning;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +34,8 @@ public class OneProductActivity extends AppCompatActivity {
 
     TextView member, rating, name, price;
 
+    LottieAnimationView addToCart;
+
 
 
     @Override
@@ -50,10 +54,15 @@ public class OneProductActivity extends AppCompatActivity {
             animationFileName = newAnimationFileName;
         }
 
+
+        addToCart = findViewById(R.id.add_to_cart_animation);
+
         member = findViewById(R.id.members);
         rating = findViewById(R.id.rating);
         name = findViewById(R.id.name);
         name.setText(productRecovered.getCategoryName());
+
+
 
         ImageView goBack = findViewById(R.id.iv_go_back);
         goBack.setClickable(true);
@@ -63,6 +72,51 @@ public class OneProductActivity extends AppCompatActivity {
                 ((Activity)view.getContext()).onBackPressed();
             }
         });
+
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("[OneProductActivity] addToCart animation", "was clicked the animation of add to cart");
+
+                Dialog mDialog = new Dialog(
+                        OneProductActivity.this
+                );
+
+                mDialog.setContentView(R.layout.popup_decide_back_buy);
+                mDialog.show();
+
+
+                LottieAnimationView goToPay = mDialog.findViewById(R.id.to_pay_animation);
+                LottieAnimationView goBackAndContinue = mDialog.findViewById(R.id.to_back_animation);
+
+                goBackAndContinue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("[OneProductActivity] popup decide: goback", "use wants to continue");
+                        // Antes era hide, pero he leido que mejor dismiss
+                        mDialog.dismiss();
+                        OneProductActivity.this.onBackPressed();
+                        OneProductActivity.this.onBackPressed();
+                    }
+                });
+
+
+                goToPay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("[OneProductActivity] popup decide: continue to pay", "use wants pay");
+                        mDialog.dismiss();
+                    }
+                });
+
+
+
+            }
+        });
+
+
+
 
         LottieAnimationView header = findViewById(R.id.iv_one_product_back_animation);
         courseRecyclerView = findViewById(R.id.course_recycler);
