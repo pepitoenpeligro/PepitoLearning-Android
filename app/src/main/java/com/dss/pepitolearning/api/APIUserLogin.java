@@ -59,7 +59,9 @@ public class APIUserLogin extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try{
             System.out.println("Llamada asincrona login");
+
             URL url = new URL(URL_WS);
+
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -80,6 +82,7 @@ public class APIUserLogin extends AsyncTask<Void, Void, Void> {
                 byte[] input = inputJSON.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
+
             System.out.println("Datos enviados");
 
             System.out.println("El servidor me responde");
@@ -166,7 +169,6 @@ public class APIUserLogin extends AsyncTask<Void, Void, Void> {
 
                         if(resultadoOperacionLogin){
                             Intent goToHome = new Intent(activity, NavigationDrawerActivity.class);
-
                             goToHome.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                             activity.startActivity(goToHome);
                         }

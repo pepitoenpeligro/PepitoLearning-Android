@@ -66,6 +66,8 @@ public class AuthenticationActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(this.getResources().getColor(R.color.button_color));
 
+
+
         this.btnSingIn = findViewById(R.id.btn_signin);
         this.btnSingUp = findViewById(R.id.btn_singup);
 
@@ -80,6 +82,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         this.check.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
+
                 check.setVisibility(View.VISIBLE);
             }
 
@@ -117,45 +120,10 @@ public class AuthenticationActivity extends AppCompatActivity {
                 Log.d("AuthenticationActivity", email + pass);
 
                 APIUserLogin login = new APIUserLogin(email, pass);
-                //login.setActivity(getApplicationContext().);
+
                 login.setActivity((Activity) view.getContext());
                 login.execute();
 
-
-               /* LottieAnimationView animacionCorrecta = (LottieAnimationView) mDialog.findViewById(R.id.animationcheck);
-
-                mDialog.show();
-
-                animacionCorrecta.setVisibility(View.VISIBLE);
-                animacionCorrecta.playAnimation();
-
-                animacionCorrecta.addAnimatorListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {
-                        animacionCorrecta.setVisibility(View.VISIBLE);
-                        mDialog.show();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        animacionCorrecta.setVisibility(View.GONE);
-                        mDialog.hide();
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animator) {
-
-                    }
-                });*/
-
-
-                //check.setVisibility(View.VISIBLE);
-                //check.playAnimation();
             }
         });
     }
@@ -165,10 +133,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
-
-        initUI();;
-
-
+        initUI();
     }
 
 

@@ -93,6 +93,4 @@
         app:srcCompat="@mipmap/gorritoxxhdpi" />
 
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
