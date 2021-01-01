@@ -1,8 +1,11 @@
 package com.dss.pepitolearning.ui.adapters;
 
 import android.animation.Animator;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +111,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
                 System.out.println(categoryList.get(position).getImage());
                 goToOneProductDescription.putExtra("animation_file_name",  categoryList.get(position).getImage());
                 goToOneProductDescription.putExtra("product_parcelable",  categoryList.get(position));
-                context.startActivity(goToOneProductDescription);
+
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View,String>(holder.animacion,"latransicion");
+
+                ActivityOptions op = ActivityOptions.makeSceneTransitionAnimation((Activity) context, pairs);
+
+
+                context.startActivity(goToOneProductDescription,op.toBundle());
 
             }
         });

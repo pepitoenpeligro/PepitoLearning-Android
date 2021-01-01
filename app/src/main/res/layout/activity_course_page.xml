@@ -33,6 +33,7 @@
                 app:lottie_autoPlay="false"
                 app:lottie_fileName="24476-check.json"
                 app:lottie_loop="true"
+                android:transitionName="latransicion"
                 >
 
             </com.airbnb.lottie.LottieAnimationView>
