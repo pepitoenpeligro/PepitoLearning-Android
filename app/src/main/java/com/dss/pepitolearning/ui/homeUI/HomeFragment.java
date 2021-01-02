@@ -102,6 +102,7 @@ public class HomeFragment extends Fragment {
 
     private void getAllCategory(Context c, List<Category> categoryList){
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1);
+        //RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
         categoryRecyclerView.setLayoutManager(layoutManager);
         productAdapter = new ProductAdapter(c, categoryList);
         categoryRecyclerView.setAdapter(productAdapter);
