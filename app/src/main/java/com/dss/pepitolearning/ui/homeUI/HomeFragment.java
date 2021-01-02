@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -96,6 +98,13 @@ public class HomeFragment extends Fragment {
 
         getAllCategory(getActivity(), categoryList);
         System.out.println("onCreateView se ha terminado");
+
+
+        ListView listView = root.findViewById(R.id.listView);
+        listView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
+                new String[] {"Producto 1", "Producto 2", "Producto 3", "Producto 4", "Producto 5", "Producto 6"}));
+
+
 
         return root;
     }
