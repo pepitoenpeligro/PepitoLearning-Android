@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.homeUI.HomeFragment"
     app:umanoDragView="@id/dragview"
-    app:umanoScrollableView="@id/listView"
+    app:umanoScrollableView="@id/shopping_cart_recicler_view"
     android:layout_gravity="bottom"
     android:gravity="bottom"
     app:umanoPanelHeight="68dp"
@@ -96,15 +96,23 @@
 
         </RelativeLayout>
 
-        <ListView
+        <!--<ListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/listView"
-            >
+            >-->
 
 
-        </ListView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/shopping_cart_recicler_view"
+                ></androidx.recyclerview.widget.RecyclerView>
+
+
+        <!--</ListView>-->
 
         <Button
             android:id="@+id/button"

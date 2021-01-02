@@ -7,15 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.dss.pepitolearning.R;
 import com.dss.pepitolearning.models.Category;
+import com.dss.pepitolearning.ui.adapters.OneCartItemAdapter;
 import com.dss.pepitolearning.ui.adapters.ProductAdapter;
 
 import java.util.ArrayList;
@@ -26,6 +29,9 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     RecyclerView categoryRecyclerView;
     ProductAdapter productAdapter;
+
+    OneCartItemAdapter carritoAdapter;
+    RecyclerView carritoRecyclerView;
 
     public void loadView(View view){
 
@@ -39,6 +45,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         categoryRecyclerView = root.findViewById(R.id.rv_catalog);
+        this.carritoRecyclerView = root.findViewById(R.id.shopping_cart_recicler_view);
 
         Category c1 = new Category();
         Category c2 = new Category();
@@ -100,13 +107,60 @@ public class HomeFragment extends Fragment {
         System.out.println("onCreateView se ha terminado");
 
 
-        ListView listView = root.findViewById(R.id.listView);
+        List<Category> carrito = new ArrayList<>();
+        carrito.add(c3);
+        carrito.add(c1);
+
+        getAllCart(getActivity(), carrito);
+
+
+
+
+        /*rw.setLayoutManager(newLayout);
+        OneCartItemAdapter ocia = new OneCartItemAdapter(getActivity(), carrito);
+        rw.setAdapter(ocia);
+        ocia.notifyDataSetChanged();*/
+
+
+
+
+        /*ListView listView = root.findViewById(R.id.listView);
         listView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
-                new String[] {"Producto 1", "Producto 2", "Producto 3", "Producto 4", "Producto 5", "Producto 6"}));
+                new String[] {"Producto 1", "Producto 2", "Producto 3", "Producto 4", "Producto 5", "Producto 6"}));*/
 
 
 
         return root;
+    }
+
+    private void getAllCart(Context c, List<Category> cart){
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
+        //RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
+        this.carritoRecyclerView.setLayoutManager(layoutManager);
+        this.carritoAdapter = new OneCartItemAdapter(c, cart);
+        carritoRecyclerView.setAdapter(carritoAdapter);
+        carritoAdapter.notifyDataSetChanged();
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(c, "on Move", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                Toast.makeText(c, "on Swiped ", Toast.LENGTH_SHORT).show();
+                //Remove swiped item from list and notify the RecyclerView
+                int position = viewHolder.getAdapterPosition();
+                cart.remove(position);
+                carritoAdapter.notifyDataSetChanged();
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(carritoRecyclerView);
+
     }
 
     private void getAllCategory(Context c, List<Category> categoryList){

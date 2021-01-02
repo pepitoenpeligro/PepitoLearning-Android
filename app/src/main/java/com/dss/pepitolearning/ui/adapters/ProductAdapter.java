@@ -49,6 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+
         holder.categoryName.setText(categoryList.get(position).getCategoryName());
         holder.totalCategory.setText(categoryList.get(position).getTotalCourses());
 
