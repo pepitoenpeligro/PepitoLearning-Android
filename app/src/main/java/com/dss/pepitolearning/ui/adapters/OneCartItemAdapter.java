@@ -64,7 +64,7 @@ public class OneCartItemAdapter  extends RecyclerView.Adapter<OneCartItemAdapter
 
 
 
-        LottieCompositionFactory.fromAsset(context.getApplicationContext(), productos.get(position).getImage()).addListener(new LottieListener<LottieComposition>() {
+        LottieCompositionFactory.fromAsset(context.getApplicationContext(), "2942-delete-bubble.json").addListener(new LottieListener<LottieComposition>() {
             @Override
             public void onResult(LottieComposition result) {
 

@@ -80,19 +80,49 @@
         android:focusable="false"
         android:orientation="vertical">
 
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="68dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:fontFamily="sans-serif-black"
-                android:paddingStart="15dp"
-                android:paddingLeft="15dp"
-                android:text="Shopping Cart"
-                android:textSize="16sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="start">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_swipe_up"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginLeft="12dp"
+
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitStart"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:layout_gravity="center"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="up.json"
+                    app:lottie_loop="true">
+
+                </com.airbnb.lottie.LottieAnimationView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:layout_gravity="center"
+                    android:paddingStart="15dp"
+                    android:paddingLeft="15dp"
+                    android:text="Shopping Cart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
 
         </RelativeLayout>
 
@@ -104,24 +134,38 @@
             >-->
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:id="@+id/shopping_cart_recicler_view"
-                ></androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
 
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:id="@+id/shopping_cart_recicler_view"
+            ></androidx.recyclerview.widget.RecyclerView>
 
         <!--</ListView>-->
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            android:layout_gravity="center"
 
-            />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_go_to_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:scaleY="1.2"
+            android:scaleX="1.2"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            app:layout_constraintDimensionRatio="1:1"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="card_to_pay.json"
+            app:lottie_loop="true"
+            android:transitionName="pay_transition"
+            >
+
+        </com.airbnb.lottie.LottieAnimationView>
 
 
     </LinearLayout>

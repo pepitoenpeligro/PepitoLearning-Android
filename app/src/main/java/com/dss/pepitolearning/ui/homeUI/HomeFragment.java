@@ -1,7 +1,11 @@
 package com.dss.pepitolearning.ui.homeUI;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.dss.pepitolearning.NavigationDrawerActivity;
+import com.dss.pepitolearning.PayActivity;
 import com.dss.pepitolearning.R;
 import com.dss.pepitolearning.models.Category;
 import com.dss.pepitolearning.ui.adapters.OneCartItemAdapter;
@@ -33,6 +40,9 @@ public class HomeFragment extends Fragment {
     OneCartItemAdapter carritoAdapter;
     RecyclerView carritoRecyclerView;
 
+
+    private LottieAnimationView goToPay;
+
     public void loadView(View view){
 
     }
@@ -46,6 +56,29 @@ public class HomeFragment extends Fragment {
 
         categoryRecyclerView = root.findViewById(R.id.rv_catalog);
         this.carritoRecyclerView = root.findViewById(R.id.shopping_cart_recicler_view);
+
+
+        goToPay = root.findViewById(R.id.animation_go_to_pay);
+
+        goToPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent goToPayActivity = new Intent(getActivity(), PayActivity.class);
+                /*goToPayActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                getActivity().startActivity(goToPayActivity);*/
+
+
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View,String>(goToPay,"pay_transition");
+
+                Activity actividad = (Activity) getActivity();
+                ActivityOptions op = ActivityOptions.makeSceneTransitionAnimation(actividad, pairs);
+
+
+                getActivity().startActivity(goToPayActivity,op.toBundle());
+            }
+        });
 
         Category c1 = new Category();
         Category c2 = new Category();
@@ -141,7 +174,7 @@ public class HomeFragment extends Fragment {
         carritoRecyclerView.setAdapter(carritoAdapter);
         carritoAdapter.notifyDataSetChanged();
 
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
