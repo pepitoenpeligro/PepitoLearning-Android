@@ -14,7 +14,8 @@
     app:umanoPanelHeight="68dp"
     app:umanoOverlay="false"
     app:umanoParallaxOffset="100dp"
-    app:umanoShadowHeight="4dp">
+    app:umanoShadowHeight="4dp"
+    android:id="@+id/slidingUpPanel">
 
 
 

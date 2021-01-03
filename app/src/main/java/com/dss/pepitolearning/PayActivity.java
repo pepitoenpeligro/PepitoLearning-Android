@@ -3,16 +3,20 @@ package com.dss.pepitolearning;
 import android.animation.Animator;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieCompositionFactory;
 import com.airbnb.lottie.LottieListener;
+import com.dss.pepitolearning.ui.homeUI.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -32,6 +36,7 @@ import java.util.Locale;
 public class PayActivity extends AppCompatActivity {
 
     LottieAnimationView animacionPay;
+    AppCompatButton proced_to_pay;
 
 
     private ImageView goBack;
@@ -112,6 +117,74 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ((Activity)v.getContext()).onBackPressed();
+            }
+        });
+
+        animacionPay = findViewById(R.id.tpv_animation);
+
+
+        proced_to_pay = findViewById(R.id.proced_to_pay);
+        proced_to_pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Abrir modal, mostart que ha ido bien la operacion y volver atras
+
+                Dialog mDialog = new Dialog(((Activity)v.getContext()));
+                mDialog.setContentView(R.layout.popup);
+
+                LottieAnimationView animation_popup = (LottieAnimationView) mDialog.findViewById(R.id.animationcheck);
+                LottieCompositionFactory.fromAsset(((Activity)v.getContext()).getApplicationContext(), "tpv.json").addListener(new LottieListener<LottieComposition>() {
+                    @Override
+                    public void onResult(LottieComposition result) {
+
+                        mDialog.show();
+
+                        animation_popup.setComposition(result);
+                        animation_popup.setVisibility(View.VISIBLE);
+                        animation_popup.playAnimation();
+
+                        animation_popup.addAnimatorListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animator) {
+
+                                animation_popup.setVisibility(View.VISIBLE);
+                                mDialog.show();
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animator) {
+                                animation_popup.setVisibility(View.GONE);
+                                mDialog.dismiss();
+
+                                /*if(resultadoOperacionLogin){
+                                    Intent goToHome = new Intent(activity, NavigationDrawerActivity.class);
+                                    goToHome.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                    activity.startActivity(goToHome);
+                                }*/
+
+                                ((Activity)v.getContext()).onBackPressed();
+                                HomeFragment.bajaPanel();
+
+
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animator) {
+
+                            }
+                        });
+
+
+                    }
+                });
+
+
+
             }
         });
     }

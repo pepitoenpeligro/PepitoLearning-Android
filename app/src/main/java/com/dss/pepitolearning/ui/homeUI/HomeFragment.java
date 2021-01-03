@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.dss.pepitolearning.R;
 import com.dss.pepitolearning.models.Category;
 import com.dss.pepitolearning.ui.adapters.OneCartItemAdapter;
 import com.dss.pepitolearning.ui.adapters.ProductAdapter;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +42,18 @@ public class HomeFragment extends Fragment {
     OneCartItemAdapter carritoAdapter;
     RecyclerView carritoRecyclerView;
 
+    public static SlidingUpPanelLayout slidingUpPanel;
+
 
     private LottieAnimationView goToPay;
 
     public void loadView(View view){
 
+    }
+
+    public static void bajaPanel(){
+        Log.d("[HomeFragment]", "Colapsando");
+        slidingUpPanel.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 
 
@@ -56,6 +65,9 @@ public class HomeFragment extends Fragment {
 
         categoryRecyclerView = root.findViewById(R.id.rv_catalog);
         this.carritoRecyclerView = root.findViewById(R.id.shopping_cart_recicler_view);
+
+        slidingUpPanel = root.findViewById(R.id.slidingUpPanel);
+
 
 
         goToPay = root.findViewById(R.id.animation_go_to_pay);
