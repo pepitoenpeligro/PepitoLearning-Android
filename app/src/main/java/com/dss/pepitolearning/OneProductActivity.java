@@ -24,6 +24,7 @@ import com.dss.pepitolearning.models.Course;
 import com.dss.pepitolearning.models.OneProduct;
 import com.dss.pepitolearning.models.PlayList;
 import com.dss.pepitolearning.ui.adapters.OneProductAdapter;
+import com.dss.pepitolearning.ui.homeUI.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,58 @@ public class OneProductActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("[OneProductoActivity]", "adding product to cart");
                 NavigationDrawerActivity.operateShoppingCart().add(productRecovered);
+
+
+                Dialog mDialog = new Dialog(((Activity)v.getContext()));
+                mDialog.setContentView(R.layout.popup);
+
+
+                LottieAnimationView animation_popup = (LottieAnimationView) mDialog.findViewById(R.id.animationcheck);
+                LottieCompositionFactory.fromAsset(((Activity)v.getContext()).getApplicationContext(), "24476-check.json").addListener(new LottieListener<LottieComposition>() {
+                    @Override
+                    public void onResult(LottieComposition result) {
+
+                        mDialog.show();
+
+                        animation_popup.setComposition(result);
+                        animation_popup.setVisibility(View.VISIBLE);
+                        animation_popup.playAnimation();
+
+                        animation_popup.addAnimatorListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animator) {
+
+                                animation_popup.setVisibility(View.VISIBLE);
+                                mDialog.show();
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animator) {
+                                animation_popup.setVisibility(View.GONE);
+                                mDialog.dismiss();
+
+                                ((Activity)v.getContext()).onBackPressed();
+                                HomeFragment.bajaPanel();
+                                HomeFragment.updateDataSet();
+
+
+
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animator) {
+
+                            }
+                        });
+
+
+                    }
+                });
             }
         });
 

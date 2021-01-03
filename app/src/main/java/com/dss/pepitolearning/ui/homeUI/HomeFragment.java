@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
     RecyclerView categoryRecyclerView;
     ProductAdapter productAdapter;
 
-    OneCartItemAdapter carritoAdapter;
+    static OneCartItemAdapter carritoAdapter;
     RecyclerView carritoRecyclerView;
 
     private List<Course> courseList;
@@ -245,5 +245,9 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
         this.courseList.addAll(c);
         populateCourses();
         //populateShoppingCart();
+    }
+
+    public static void updateDataSet(){
+        carritoAdapter.notifyDataSetChanged();
     }
 }
