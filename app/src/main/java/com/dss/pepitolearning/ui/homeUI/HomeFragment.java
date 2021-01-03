@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.dss.pepitolearning.NavigationDrawerActivity;
@@ -47,6 +48,8 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
 
     private LottieAnimationView slidingAnimation;
     private LottieAnimationView goToPay;
+
+    SwipeRefreshLayout swipLayout;
 
     public void loadView(View view){
 
@@ -128,11 +131,29 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
     }
 
 
+    public void loadProducts(){
+        APIProductGet apipg = new APIProductGet(HomeFragment.this);
+        apipg.setActivity(getActivity());
+        apipg.execute();
+
+        //getAllCategory(getActivity(), courseList);
+    }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        swipLayout = root.findViewById(R.id.swipe_layout);
+
+        swipLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadProducts();
+            }
+        });
+
 
 
 
@@ -243,11 +264,15 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
         System.out.println("####################");
         this.courseList = new ArrayList<>();
         this.courseList.addAll(c);
-        populateCourses();
-        //populateShoppingCart();
+        //populateCourses();
+        getAllCategory(getActivity(), courseList);
+        this.swipLayout.setRefreshing(false);
+
     }
 
     public static void updateDataSet(){
         carritoAdapter.notifyDataSetChanged();
     }
+
+
 }

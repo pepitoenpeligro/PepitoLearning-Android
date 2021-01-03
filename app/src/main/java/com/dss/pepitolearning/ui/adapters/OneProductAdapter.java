@@ -20,7 +20,7 @@ import com.dss.pepitolearning.models.PlayList;
 
 import java.util.List;
 
-public class OneProductAdapter extends RecyclerView.Adapter<OneProductAdapter.CourseViewHolder> {
+public class OneProductAdapter extends RecyclerView.Adapter<OneProductAdapter.CourseViewHolder>  {
 
     Context context;
     List<PlayList> playLists;
