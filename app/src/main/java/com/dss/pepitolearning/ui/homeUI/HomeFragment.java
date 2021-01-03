@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.dss.pepitolearning.NavigationDrawerActivity;
 import com.dss.pepitolearning.PayActivity;
 import com.dss.pepitolearning.R;
 import com.dss.pepitolearning.api.APIProductGet;
@@ -109,14 +110,14 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
 
 
     public void populateShoppingCart(){
-        List<Course> carrito = new ArrayList<>();
+        /*List<Course> carrito = new ArrayList<>();
         if(carrito.size()>1){
             carrito.add(courseList.get(0));
             carrito.add(courseList.get(1));
         }
 
         getAllCart(getActivity(), carrito);
-
+        */
 
 
     }
@@ -153,10 +154,12 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
                 if(newState == SlidingUpPanelLayout.PanelState.EXPANDED){
                     System.out.println("Ahora se ha expandido");
                     slidingAnimation.setRotation(180);
+                    carritoAdapter.notifyDataSetChanged();
 
                 }else if(newState == SlidingUpPanelLayout.PanelState.COLLAPSED){
                     System.out.println("Ahora está escondido");
                     slidingAnimation.setRotation(360);
+                    carritoAdapter.notifyDataSetChanged();
                 }
 
 
@@ -186,6 +189,8 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
         APIProductGet apipg = new APIProductGet(this);
         apipg.setActivity(getActivity());
         apipg.execute();
+
+        getAllCart(getActivity(), NavigationDrawerActivity.operateShoppingCart());
         return root;
     }
 
@@ -201,6 +206,7 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 //Toast.makeText(c, "on Move", Toast.LENGTH_SHORT).show();
+                carritoAdapter.notifyDataSetChanged();
                 return false;
             }
 
@@ -208,7 +214,10 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 Toast.makeText(c, "Erased", Toast.LENGTH_SHORT).show();
                 int position = viewHolder.getAdapterPosition();
-                cart.remove(position);
+                //cart.remove(position);
+
+                NavigationDrawerActivity.operateShoppingCart().remove(position);
+
                 carritoAdapter.notifyDataSetChanged();
             }
         };
@@ -235,6 +244,6 @@ public class HomeFragment extends Fragment implements APIProductGet.OnTaskComple
         this.courseList = new ArrayList<>();
         this.courseList.addAll(c);
         populateCourses();
-        populateShoppingCart();
+        //populateShoppingCart();
     }
 }

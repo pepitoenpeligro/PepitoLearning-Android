@@ -98,16 +98,6 @@ public class APIProductGet extends AsyncTask<Void, Void, Void> {
             }
             System.out.println("___________________________");
 
-            /*Course c = new Course();
-            c.setCategoryName("el del callback");
-            c.setPrice("-1234€");
-            this.myCourses.add(c);*/
-
-            // Parsear los productos a un objeto de tipo Course
-
-            // Incluir los productos en el array
-
-
 
         } catch (MalformedURLException e) {
             Log.d("Product Async Task", "Url mal formada");

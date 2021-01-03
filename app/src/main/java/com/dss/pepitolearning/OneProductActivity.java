@@ -84,7 +84,21 @@ public class OneProductActivity extends AppCompatActivity {
         });
 
 
+
+
+
+
+        // Añadir al carrito
         addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("[OneProductoActivity]", "adding product to cart");
+                NavigationDrawerActivity.operateShoppingCart().add(productRecovered);
+            }
+        });
+
+
+        /*addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("[OneProductActivity] addToCart animation", "was clicked the animation of add to cart");
@@ -123,7 +137,7 @@ public class OneProductActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
 
 

@@ -7,6 +7,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.dss.pepitolearning.api.APIProductGet;
+import com.dss.pepitolearning.models.Course;
+import com.dss.pepitolearning.models.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -19,7 +21,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NavigationDrawerActivity extends AppCompatActivity {
+
+    public static List<Course> carrito;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -38,6 +45,7 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         initWindowColor();
         toolbar.setBackgroundResource(R.color.button_color);
+        carrito = new ArrayList<>();
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -68,6 +76,10 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public static List<Course> operateShoppingCart(){
+        return carrito;
     }
 
     /*@Override
