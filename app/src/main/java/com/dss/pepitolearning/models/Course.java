@@ -7,7 +7,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Category implements Parcelable {
+public class Course implements Parcelable {
 
     @SerializedName("categoryId")
     @Expose
@@ -22,29 +22,36 @@ public class Category implements Parcelable {
     @Expose
     private String image;
 
-    public Category(){
+    @SerializedName("image")
+    @Expose
+    private String price;
+
+
+    public Course(){
         categoryId      = "";
         categoryName    = "";
         totalCourses    = "";
         image           = "";
+        price           = "";
     }
 
-    protected Category(Parcel in) {
+    protected Course(Parcel in) {
         categoryId = in.readString();
         categoryName = in.readString();
         totalCourses = in.readString();
         image = in.readString();
+        price = in.readString();
     }
 
-    public static final Creator<Category> CREATOR = new Creator<Category>() {
+    public static final Creator<Course> CREATOR = new Creator<Course>() {
         @Override
-        public Category createFromParcel(Parcel in) {
-            return new Category(in);
+        public Course createFromParcel(Parcel in) {
+            return new Course(in);
         }
 
         @Override
-        public Category[] newArray(int size) {
-            return new Category[size];
+        public Course[] newArray(int size) {
+            return new Course[size];
         }
     };
 
@@ -80,6 +87,13 @@ public class Category implements Parcelable {
         this.image = image;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     @Override
     public int describeContents() {
@@ -92,15 +106,13 @@ public class Category implements Parcelable {
         parcel.writeString(this.categoryName);
         parcel.writeString(this.totalCourses);
         parcel.writeString(this.image);
+        parcel.writeString(this.price);
     }
 
     @Override
     public String toString() {
-        return "Category{" +
-                "categoryId='" + categoryId + '\'' +
-                ", categoryName='" + categoryName + '\'' +
-                ", totalCourses='" + totalCourses + '\'' +
-                ", image='" + image + '\'' +
+        return "Course{" +
+                "price='" + price + '\'' +
                 '}';
     }
 }

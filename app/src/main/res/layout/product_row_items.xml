@@ -29,13 +29,14 @@
 
 
         <com.airbnb.lottie.LottieAnimationView
-            android:layout_marginTop="24dp"
             android:id="@+id/course_lottie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:scaleType="fitStart"
+            android:transitionName="latransicion"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,9 +44,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="false"
             app:lottie_fileName="24476-check.json"
-            app:lottie_loop="true"
-            android:transitionName="latransicion"
-            >
+            app:lottie_loop="true">
 
         </com.airbnb.lottie.LottieAnimationView>
 
@@ -78,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:text="Courses"
+            android:text="Course"
             android:textColor="#8F95B2"
             app:layout_constraintBottom_toBottomOf="@+id/total_course"
             app:layout_constraintStart_toEndOf="@+id/total_course"

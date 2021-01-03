@@ -10,8 +10,6 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,10 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.dss.pepitolearning.NavigationDrawerActivity;
 import com.dss.pepitolearning.PayActivity;
 import com.dss.pepitolearning.R;
-import com.dss.pepitolearning.models.Category;
+import com.dss.pepitolearning.models.Course;
 import com.dss.pepitolearning.ui.adapters.OneCartItemAdapter;
 import com.dss.pepitolearning.ui.adapters.ProductAdapter;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -42,12 +39,84 @@ public class HomeFragment extends Fragment {
     OneCartItemAdapter carritoAdapter;
     RecyclerView carritoRecyclerView;
 
+    private List<Course> courseList;
+
     public static SlidingUpPanelLayout slidingUpPanel;
 
-
+    private LottieAnimationView slidingAnimation;
     private LottieAnimationView goToPay;
 
     public void loadView(View view){
+
+    }
+
+
+    public String convertName(String origin){
+        String fileName = "";
+        fileName = origin.replace(" ", "_");
+        fileName = fileName.toLowerCase();
+        return fileName;
+    }
+
+
+
+    public void populateCourses(){
+
+        courseList = new ArrayList<>();
+
+        Course c1 = new Course();
+        Course c2 = new Course();
+        Course c3 = new Course();
+
+        Course c4 = new Course();
+        Course c5 = new Course();
+        Course c6 = new Course();
+
+
+
+        c1.setCategoryName("Neural Networks");
+        c1.setImage("course_" + convertName(c1.getCategoryName()) + ".json");
+        System.out.println("SACO");
+        System.out.println(c1.getImage());
+        c1.setPrice("11"+ "€");
+
+        c2.setCategoryName("Rust");
+        c2.setImage("course_" + convertName(c2.getCategoryName()) + ".json");
+        c2.setPrice("12"+ "€");
+
+        c3.setCategoryName("Webapps");
+        c3.setImage("course_" + convertName(c3.getCategoryName()) + ".json");
+        c3.setPrice("11"+ "€");
+
+        c4.setCategoryName("Databases");
+        c4.setImage("course_" + convertName(c4.getCategoryName()) + ".json");
+        c4.setPrice("11"+ "€");
+
+        c5.setCategoryName("C");
+        c5.setImage("course_" + convertName(c5.getCategoryName()) + ".json");
+        c5.setPrice("11"+ "€");
+
+        c6.setCategoryName("Fundamentals");
+        c6.setImage("course_" + convertName(c6.getCategoryName()) + ".json");
+        c6.setPrice("11"+ "€");
+
+        courseList.add(c1);
+        courseList.add(c2);
+        courseList.add(c3);
+        courseList.add(c4);
+        courseList.add(c5);
+        courseList.add(c6);
+
+        getAllCategory(getActivity(), courseList);
+    }
+
+
+    public void populateShoppingCart(){
+        List<Course> carrito = new ArrayList<>();
+        carrito.add(courseList.get(0));
+        carrito.add(courseList.get(1));
+
+        getAllCart(getActivity(), carrito);
 
     }
 
@@ -57,30 +126,46 @@ public class HomeFragment extends Fragment {
     }
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         categoryRecyclerView = root.findViewById(R.id.rv_catalog);
         this.carritoRecyclerView = root.findViewById(R.id.shopping_cart_recicler_view);
 
+        slidingAnimation = root.findViewById(R.id.animation_swipe_up);
+
         slidingUpPanel = root.findViewById(R.id.slidingUpPanel);
 
+        slidingUpPanel.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
 
+            }
+
+            @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+                if(newState == SlidingUpPanelLayout.PanelState.EXPANDED){
+                    System.out.println("Ahora se ha expandido");
+                    slidingAnimation.setRotation(180);
+
+                }else if(newState == SlidingUpPanelLayout.PanelState.COLLAPSED){
+                    System.out.println("Ahora está escondido");
+                    slidingAnimation.setRotation(360);
+                }
+
+
+            }
+        });
 
         goToPay = root.findViewById(R.id.animation_go_to_pay);
 
         goToPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent goToPayActivity = new Intent(getActivity(), PayActivity.class);
-                /*goToPayActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                getActivity().startActivity(goToPayActivity);*/
-
-
                 Pair[] pairs = new Pair[1];
                 pairs[0] = new Pair<View,String>(goToPay,"pay_transition");
 
@@ -92,95 +177,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Category c1 = new Category();
-        Category c2 = new Category();
-        Category c3 = new Category();
-
-        Category c4 = new Category();
-        Category c5 = new Category();
-        Category c6 = new Category();
-        Category c7 = new Category();
-        Category c8 = new Category();
-
-        List<Category> categoryList = new ArrayList<>();
-
-        c1.setCategoryName("Android");
-        c2.setCategoryName("Swift");
-        c3.setCategoryName("Rust");
-
-        c4.setCategoryName("C4");
-        c5.setCategoryName("C5");
-        c6.setCategoryName("C6");
-        c7.setCategoryName("C7");
-        c8.setCategoryName("C8");
-
-
-
-        /*c1.setImage("https://image.freepik.com/vector-gratis/ilustracion-concepto-estudiar_114360-1107.jpg");
-        c2.setImage("https://image.freepik.com/vector-gratis/personas-enfocadas-que-estudian-escuela-linea_74855-5834.jpg");
-        c3.setImage("https://image.freepik.com/vector-gratis/estudiante-femenino-escuchando-webinar-linea_74855-6461.jpg");
-
-        c4.setImage("https://i.pinimg.com/originals/d5/44/ff/d544ffca4ecb461fc19da7e384cbc6d5.gif");
-        c5.setImage("https://image.freepik.com/vector-gratis/estudiante-femenino-escuchando-webinar-linea_74855-6461.jpg");
-        c6.setImage("https://image.freepik.com/vector-gratis/estudiante-femenino-escuchando-webinar-linea_74855-6461.jpg");
-        c7.setImage("https://image.freepik.com/vector-gratis/estudiante-femenino-escuchando-webinar-linea_74855-6461.jpg");
-        c8.setImage("https://image.freepik.com/vector-gratis/estudiante-femenino-escuchando-webinar-linea_74855-6461.jpg");*/
-
-        c1.setImage("27731-study-methods.json");
-        c2.setImage("41464-student-with-books.json");
-        c3.setImage("41375-laptop-rocket.json");
-        c4.setImage("41504-developer-is-programming-using-notebook.json");
-        c5.setImage("41504-developer-is-programming-using-notebook.json");
-        c6.setImage("41504-developer-is-programming-using-notebook.json");
-        c7.setImage("41504-developer-is-programming-using-notebook.json");
-
-
-
-        categoryList.add(c3);
-        categoryList.add(c4);
-        categoryList.add(c1);
-        categoryList.add(c2);
-        categoryList.add(c5);
-        categoryList.add(c6);
-        categoryList.add(c7);
-        categoryList.add(c8);
-
-
-
-
-        getAllCategory(getActivity(), categoryList);
-        System.out.println("onCreateView se ha terminado");
-
-
-        List<Category> carrito = new ArrayList<>();
-        carrito.add(c3);
-        carrito.add(c1);
-
-        getAllCart(getActivity(), carrito);
-
-
-
-
-        /*rw.setLayoutManager(newLayout);
-        OneCartItemAdapter ocia = new OneCartItemAdapter(getActivity(), carrito);
-        rw.setAdapter(ocia);
-        ocia.notifyDataSetChanged();*/
-
-
-
-
-        /*ListView listView = root.findViewById(R.id.listView);
-        listView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
-                new String[] {"Producto 1", "Producto 2", "Producto 3", "Producto 4", "Producto 5", "Producto 6"}));*/
-
-
-
+        populateCourses();
+        populateShoppingCart();
         return root;
     }
 
-    private void getAllCart(Context c, List<Category> cart){
+    private void getAllCart(Context c, List<Course> cart){
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
-        //RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
         this.carritoRecyclerView.setLayoutManager(layoutManager);
         this.carritoAdapter = new OneCartItemAdapter(c, cart);
         carritoRecyclerView.setAdapter(carritoAdapter);
@@ -190,14 +193,13 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                Toast.makeText(c, "on Move", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(c, "on Move", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                Toast.makeText(c, "on Swiped ", Toast.LENGTH_SHORT).show();
-                //Remove swiped item from list and notify the RecyclerView
+                Toast.makeText(c, "Erased", Toast.LENGTH_SHORT).show();
                 int position = viewHolder.getAdapterPosition();
                 cart.remove(position);
                 carritoAdapter.notifyDataSetChanged();
@@ -208,11 +210,10 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void getAllCategory(Context c, List<Category> categoryList){
+    private void getAllCategory(Context c, List<Course> courseList){
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1);
-        //RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
         categoryRecyclerView.setLayoutManager(layoutManager);
-        productAdapter = new ProductAdapter(c, categoryList);
+        productAdapter = new ProductAdapter(c, courseList);
         categoryRecyclerView.setAdapter(productAdapter);
         productAdapter.notifyDataSetChanged();
     }

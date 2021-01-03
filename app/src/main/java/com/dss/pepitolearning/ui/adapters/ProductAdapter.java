@@ -22,7 +22,7 @@ import com.airbnb.lottie.LottieCompositionFactory;
 import com.airbnb.lottie.LottieListener;
 import com.dss.pepitolearning.OneProductActivity;
 import com.dss.pepitolearning.R;
-import com.dss.pepitolearning.models.Category;
+import com.dss.pepitolearning.models.Course;
 
 
 import java.util.List;
@@ -30,11 +30,11 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CategoryViewHolder> {
 
     private Context context;
-    List<Category> categoryList;
+    List<Course> courseList;
 
-    public ProductAdapter(Context context, List<Category> categoryList) {
+    public ProductAdapter(Context context, List<Course> courseList) {
         this.context = context;
-        this.categoryList = categoryList;
+        this.courseList = courseList;
     }
 
     @NonNull
@@ -50,15 +50,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
 
-        holder.categoryName.setText(categoryList.get(position).getCategoryName());
-        holder.totalCategory.setText(categoryList.get(position).getTotalCourses());
+        holder.categoryName.setText(courseList.get(position).getCategoryName());
+        holder.totalCategory.setText(courseList.get(position).getTotalCourses());
 
 
 
         //Glide.with(context).load(categoryList.get(position).getImage()).into(holder.categoryImage);
 
 
-        LottieCompositionFactory.fromAsset(context.getApplicationContext(), categoryList.get(position).getImage()).addListener(new LottieListener<LottieComposition>() {
+        LottieCompositionFactory.fromAsset(context.getApplicationContext(), courseList.get(position).getImage()).addListener(new LottieListener<LottieComposition>() {
             @Override
             public void onResult(LottieComposition result) {
 
@@ -109,9 +109,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
 
                 Intent goToOneProductDescription = new Intent(context, OneProductActivity.class);
                 System.out.println("Le paso a la siguiente actividad:");
-                System.out.println(categoryList.get(position).getImage());
-                goToOneProductDescription.putExtra("animation_file_name",  categoryList.get(position).getImage());
-                goToOneProductDescription.putExtra("product_parcelable",  categoryList.get(position));
+                System.out.println(courseList.get(position).getImage());
+                goToOneProductDescription.putExtra("animation_file_name",  courseList.get(position).getImage());
+                goToOneProductDescription.putExtra("product_parcelable",  courseList.get(position));
 
                 Pair[] pairs = new Pair[1];
                 pairs[0] = new Pair<View,String>(holder.animacion,"latransicion");
@@ -129,7 +129,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
 
     @Override
     public int getItemCount() {
-        return categoryList.size();
+        return courseList.size();
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder{

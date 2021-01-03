@@ -7,6 +7,7 @@
     tools:context=".OneProductActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,13 +19,14 @@
             android:layout_height="match_parent">
 
             <com.airbnb.lottie.LottieAnimationView
-                android:layout_marginTop="24dp"
                 android:id="@+id/iv_one_product_back_animation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:scaleType="fitStart"
+                android:transitionName="latransicion"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,16 +34,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="false"
                 app:lottie_fileName="24476-check.json"
-                app:lottie_loop="true"
-                android:transitionName="latransicion"
-                >
+                app:lottie_loop="true">
 
             </com.airbnb.lottie.LottieAnimationView>
 
 
-
-
-           <!-- <ImageView
+            <!-- <ImageView
                 android:id="@+id/iv_one_product_back_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,12 +112,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="420dp"
+        android:layout_height="0dp"
         android:background="@drawable/layout_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
 
         <TextView
@@ -127,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="Course Content"
             android:textColor="#0D1333"
             android:textSize="18sp"
@@ -146,9 +145,6 @@
             app:layout_constraintVertical_bias="0.0" />
 
 
-
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
@@ -156,8 +152,7 @@
             android:background="@drawable/buy_layout_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/add_to_cart_animation"
@@ -182,16 +177,10 @@
                 >
 
 
-
-
             </com.airbnb.lottie.LottieAnimationView>
 
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

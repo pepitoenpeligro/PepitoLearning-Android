@@ -140,8 +140,6 @@ public class PayActivity extends AppCompatActivity {
         });
 
 
-
-
         proced_to_pay = findViewById(R.id.proced_to_pay);
 
         proced_to_pay.setClickable(false);

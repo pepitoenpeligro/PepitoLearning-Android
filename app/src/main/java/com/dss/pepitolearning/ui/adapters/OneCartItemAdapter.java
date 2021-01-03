@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -17,8 +15,7 @@ import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieCompositionFactory;
 import com.airbnb.lottie.LottieListener;
 import com.dss.pepitolearning.R;
-import com.dss.pepitolearning.models.Category;
-import com.dss.pepitolearning.models.PlayList;
+import com.dss.pepitolearning.models.Course;
 
 import java.util.List;
 
@@ -26,9 +23,9 @@ public class OneCartItemAdapter  extends RecyclerView.Adapter<OneCartItemAdapter
 
     Context context;
 
-    List<Category> productos;
+    List<Course> productos;
 
-    public OneCartItemAdapter(Context context, List<Category> productos) {
+    public OneCartItemAdapter(Context context, List<Course> productos) {
         System.out.println("[OneCartItem][Adapter] constructor");
         this.context = context;
         this.productos = productos;
@@ -53,16 +50,7 @@ public class OneCartItemAdapter  extends RecyclerView.Adapter<OneCartItemAdapter
         System.out.println("[OneCartItem][Adapter] onBindViewHolder");
         holder.title.setText(productos.get(position).getCategoryName());
 
-        // El id es el precio
-        holder.price.setText("10€");
-
-
-
-
-
-
-
-
+        holder.price.setText(productos.get(position).getPrice());
 
         LottieCompositionFactory.fromAsset(context.getApplicationContext(), "2942-delete-bubble.json").addListener(new LottieListener<LottieComposition>() {
             @Override
@@ -97,7 +85,6 @@ public class OneCartItemAdapter  extends RecyclerView.Adapter<OneCartItemAdapter
 
                     }
                 });
-
 
             }
         });

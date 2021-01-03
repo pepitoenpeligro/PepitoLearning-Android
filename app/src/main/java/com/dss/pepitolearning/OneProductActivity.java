@@ -20,7 +20,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieCompositionFactory;
 import com.airbnb.lottie.LottieListener;
-import com.dss.pepitolearning.models.Category;
+import com.dss.pepitolearning.models.Course;
 import com.dss.pepitolearning.models.OneProduct;
 import com.dss.pepitolearning.models.PlayList;
 import com.dss.pepitolearning.ui.adapters.OneProductAdapter;
@@ -53,7 +53,7 @@ public class OneProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course_page);
         initWindowColor();
         
-        Category productRecovered = getIntent().getExtras().getParcelable("product_parcelable");
+        Course productRecovered = getIntent().getExtras().getParcelable("product_parcelable");
 
         String animationFileName = "41464-student-with-books.json";
 
