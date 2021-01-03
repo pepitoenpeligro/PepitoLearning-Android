@@ -25,6 +25,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -69,7 +71,15 @@ public class PayActivity extends AppCompatActivity {
     private boolean dateFilled = false;
     private boolean cvcFilled = false;
 
+    public void initWindowColor(){
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(this.getResources().getColor(R.color.button_color));
+    }
+
     public void initUI(){
+        initWindowColor();
         globalCalendar = Calendar.getInstance();
         dateEdit = findViewById(R.id.date);
         nameEdit = findViewById(R.id.name);
