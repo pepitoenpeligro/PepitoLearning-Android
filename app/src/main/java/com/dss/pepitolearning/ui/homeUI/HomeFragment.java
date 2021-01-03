@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.airbnb.lottie.LottieAnimationView;
 import com.dss.pepitolearning.PayActivity;
 import com.dss.pepitolearning.R;
+import com.dss.pepitolearning.api.APIProductGet;
 import com.dss.pepitolearning.models.Course;
 import com.dss.pepitolearning.ui.adapters.OneCartItemAdapter;
 import com.dss.pepitolearning.ui.adapters.ProductAdapter;
@@ -30,7 +31,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements APIProductGet.OnTaskCompleted  {
 
     private HomeViewModel homeViewModel;
     RecyclerView categoryRecyclerView;
@@ -51,18 +52,14 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public String convertName(String origin){
-        String fileName = "";
-        fileName = origin.replace(" ", "_");
-        fileName = fileName.toLowerCase();
-        return fileName;
-    }
+
 
 
 
     public void populateCourses(){
 
-        courseList = new ArrayList<>();
+
+        /*courseList = new ArrayList<>();
 
         Course c1 = new Course();
         Course c2 = new Course();
@@ -105,7 +102,7 @@ public class HomeFragment extends Fragment {
         courseList.add(c3);
         courseList.add(c4);
         courseList.add(c5);
-        courseList.add(c6);
+        courseList.add(c6);*/
 
         getAllCategory(getActivity(), courseList);
     }
@@ -113,10 +110,14 @@ public class HomeFragment extends Fragment {
 
     public void populateShoppingCart(){
         List<Course> carrito = new ArrayList<>();
-        carrito.add(courseList.get(0));
-        carrito.add(courseList.get(1));
+        if(carrito.size()>1){
+            carrito.add(courseList.get(0));
+            carrito.add(courseList.get(1));
+        }
 
         getAllCart(getActivity(), carrito);
+
+
 
     }
 
@@ -131,6 +132,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+
 
         categoryRecyclerView = root.findViewById(R.id.rv_catalog);
         this.carritoRecyclerView = root.findViewById(R.id.shopping_cart_recicler_view);
@@ -177,8 +180,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        populateCourses();
-        populateShoppingCart();
+        /*populateCourses();
+        populateShoppingCart();*/
+
+        APIProductGet apipg = new APIProductGet(this);
+        apipg.setActivity(getActivity());
+        apipg.execute();
         return root;
     }
 
@@ -216,5 +223,18 @@ public class HomeFragment extends Fragment {
         productAdapter = new ProductAdapter(c, courseList);
         categoryRecyclerView.setAdapter(productAdapter);
         productAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onTaskCompleted(List<Course> c) {
+        System.out.println("Se completó la operacion y estoy llamando desde HomeFragment");
+
+        System.out.println("Lo que he descargao");
+        System.out.println(c);
+        System.out.println("####################");
+        this.courseList = new ArrayList<>();
+        this.courseList.addAll(c);
+        populateCourses();
+        populateShoppingCart();
     }
 }

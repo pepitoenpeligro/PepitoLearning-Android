@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.dss.pepitolearning.api.APIProductGet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -39,19 +40,13 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         toolbar.setBackgroundResource(R.color.button_color);
 
 
-
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+
+
+
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_admin_testing, R.id.nav_otro)
                 .setOpenableLayout(drawer)
@@ -74,4 +69,10 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    /*@Override
+    public void onTaskCompleted() {
+        /*System.out.println("Me llaman desde Navigation Drawer");
+
+    }*/
 }
