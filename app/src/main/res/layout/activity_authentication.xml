@@ -27,13 +27,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/headxxhdpi" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
 
         android:id="@+id/btn_signin"
         android:layout_width="319dp"
         android:layout_height="46dp"
         android:layout_marginBottom="36dp"
-        android:background="@mipmap/boton_azulxxhdpi"
+        android:background="@drawable/btn_rounded"
         android:fontFamily="sans-serif"
         android:text="Sing In"
         android:textColor="@color/white"

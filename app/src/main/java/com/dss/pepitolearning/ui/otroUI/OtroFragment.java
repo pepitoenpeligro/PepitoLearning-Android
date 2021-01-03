@@ -25,31 +25,12 @@ public class OtroFragment extends Fragment {
         otroViewModel =
                 new ViewModelProvider(this).get(OtroViewModel.class);
         View root = inflater.inflate(R.layout.fragment_otro, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-
-        Button btn_getproducts = root.findViewById(R.id.btn_api_getproducts);
-
-        btn_getproducts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                APIProductGet p = new APIProductGet();
-                p.setActivity(getActivity());
-                p.execute();
-            }
-        });
 
 
 
 
 
 
-
-        otroViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

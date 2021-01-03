@@ -41,7 +41,7 @@ import java.util.Locale;
 public class PayActivity extends AppCompatActivity {
 
     LottieAnimationView animacionPay;
-    AppCompatButton proced_to_pay;
+    Button proced_to_pay;
 
 
     private ImageView goBack;

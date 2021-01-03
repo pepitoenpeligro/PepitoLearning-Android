@@ -11,7 +11,7 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
+    <!--<fragment
         android:id="@+id/nav_admin_testing"
         android:name="com.dss.pepitolearning.ui.adminUI.AdminTestingFragment"
         android:label="@string/menu_admin_testing"
@@ -21,5 +21,11 @@
         android:id="@+id/nav_otro"
         android:name="com.dss.pepitolearning.ui.otroUI.OtroFragment"
         android:label="@string/menu_otro"
-        tools:layout="@layout/fragment_otro" />
+        tools:layout="@layout/fragment_otro" />-->
+
+    <fragment
+        android:id="@+id/nav_google_maps"
+        android:name="com.dss.pepitolearning.GoogleMapsFragment"
+        android:label="Location"
+        tools:layout="@layout/fragment_google_maps" />
 </navigation>

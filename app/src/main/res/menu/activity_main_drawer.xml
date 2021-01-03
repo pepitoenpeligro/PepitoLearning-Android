@@ -8,13 +8,19 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="@string/menu_home" />
-        <item
+        <!--<item
             android:id="@+id/nav_admin_testing"
             android:icon="@drawable/ic_baseline_admin_panel_settings_24"
             android:title="@string/menu_admin_testing" />
         <item
             android:id="@+id/nav_otro"
             android:icon="@drawable/ic_menu_otro"
-            android:title="@string/menu_otro" />
+            android:title="@string/menu_otro" />-->
+
+        <item
+            android:id="@+id/nav_google_maps"
+            android:icon="@drawable/ic_baseline_where_to_vote_24"
+            android:title="Location"
+            ></item>
     </group>
 </menu>

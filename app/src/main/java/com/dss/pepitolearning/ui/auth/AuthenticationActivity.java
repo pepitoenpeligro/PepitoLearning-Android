@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,11 +32,11 @@ import com.dss.pepitolearning.api.APIUserLogin;
 public class AuthenticationActivity extends AppCompatActivity {
 
     private TextView mTextView;
-    private AppCompatButton btnSingIn;
+    private Button btnSingIn;
     private AppCompatButton btnSingUp;
 
     private EditText editTextEmail;
-    private EditText editTextPassword;
+    private static EditText editTextPassword;
 
     private ImageView gorrito;
 
@@ -57,6 +58,10 @@ public class AuthenticationActivity extends AppCompatActivity {
     // Funcion que registra usuario
     public boolean signup(String email, String password){
         return false;
+    }
+
+    public static void clearEditTexts(){
+        editTextPassword.setText("");
     }
 
     public void initUI(){
@@ -123,6 +128,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                 login.setActivity((Activity) view.getContext());
                 login.execute();
+
 
             }
         });

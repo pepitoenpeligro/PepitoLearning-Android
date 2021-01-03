@@ -1,6 +1,7 @@
 package com.dss.pepitolearning;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.Window;
@@ -13,6 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -56,7 +58,10 @@ public class NavigationDrawerActivity extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_admin_testing, R.id.nav_otro)
+                R.id.nav_home,
+                //R.id.nav_admin_testing,
+                //R.id.nav_otro,
+                R.id.map )
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -68,7 +73,21 @@ public class NavigationDrawerActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+
+
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                logout();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -78,13 +97,13 @@ public class NavigationDrawerActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    public void logout(){
+        onBackPressed();
+
+    }
+
     public static List<Course> operateShoppingCart(){
         return carrito;
     }
 
-    /*@Override
-    public void onTaskCompleted() {
-        /*System.out.println("Me llaman desde Navigation Drawer");
-
-    }*/
 }

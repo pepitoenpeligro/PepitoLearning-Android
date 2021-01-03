@@ -49,7 +49,7 @@ public class APIProductGet extends AsyncTask<Void, Void, Void> {
 
     protected void onPreExecute(){
         super.onPreExecute();
-        txtOutput = activity.findViewById(R.id.txt_output);
+
         // por si quisieramos meter un progress dialog
     }
 
@@ -112,9 +112,7 @@ public class APIProductGet extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        if(txtOutput != null){
-            txtOutput.setText(response_body);
-        }
+
 
         System.out.println("[OnPostExecute] ha finalizado");
         listener.onTaskCompleted(myCourses);
