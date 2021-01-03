@@ -185,6 +185,7 @@ public class PayActivity extends AppCompatActivity {
 
                                 ((Activity)v.getContext()).onBackPressed();
                                 HomeFragment.bajaPanel();
+                                NavigationDrawerActivity.operateShoppingCart().clear();
 
 
                             }
