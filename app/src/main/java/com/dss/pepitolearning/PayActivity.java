@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -22,7 +23,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,6 +65,9 @@ public class PayActivity extends AppCompatActivity {
     private int expiryYear;
 
     private int count = 0;
+
+    private boolean dateFilled = false;
+    private boolean cvcFilled = false;
 
     public void initUI(){
         globalCalendar = Calendar.getInstance();
@@ -105,6 +111,8 @@ public class PayActivity extends AppCompatActivity {
                 globalCalendar.set(Calendar.MONTH, monthOfYear);
                 globalCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
+                dateFilled = true;
+
             }
 
         };
@@ -117,13 +125,18 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ((Activity)v.getContext()).onBackPressed();
+                HomeFragment.bajaPanel();
             }
         });
 
-        animacionPay = findViewById(R.id.tpv_animation);
+
 
 
         proced_to_pay = findViewById(R.id.proced_to_pay);
+
+        proced_to_pay.setClickable(false);
+        proced_to_pay.setAlpha((float)0.3);
+
         proced_to_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -252,6 +265,9 @@ public class PayActivity extends AppCompatActivity {
                 }else if(editText==cvvEdit){
                     cvvView.setText(String.format("%s",s.length() > 0 ? s : "000"));
                     setCvv(s.toString());
+                    if(s.length()>2){
+                        cvcFilled = true;
+                    }
                 }
             }
 
@@ -280,6 +296,12 @@ public class PayActivity extends AppCompatActivity {
                         editText.setSelection(pos);
                     }
                     count = editText.getText().toString().length();
+                }
+
+                if(dateFilled && cvcFilled){
+                    Log.d("[onTextChanged]", "Ya podemos habilitar el boton de pago");
+                    proced_to_pay.setAlpha((float)1);
+                    proced_to_pay.setClickable(true);
                 }
 
             }

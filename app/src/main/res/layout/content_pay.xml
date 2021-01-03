@@ -26,15 +26,28 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_left" />
 
+            <TextView
+                android:id="@+id/titlePay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="64dp"
+                android:text="Pay Process"
+                android:textColor="#0D1333"
+                android:textSize="24sp"
+
+                app:layout_constraintStart_toEndOf="@+id/iv_go_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/card_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="36dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="64dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_go_back">
+                app:layout_constraintTop_toBottomOf="@+id/titlePay">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/card_back"
@@ -371,37 +384,27 @@
                 android:layout_width="319dp"
                 android:layout_height="46dp"
                 android:layout_marginBottom="36dp"
-                android:background="@mipmap/boton_azulxxhdpi"
+
+
+
                 android:fontFamily="sans-serif"
                 android:text="Pay"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_section" />
 
 
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/tpv_animation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="fitStart"
-                android:transitionName="una"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/form_section"
-                app:lottie_autoPlay="false"
-                app:lottie_fileName="tpv.json"
-                app:lottie_loop="false">
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:background="@drawable/btn_rounded"
+                />
 
-            </com.airbnb.lottie.LottieAnimationView>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
