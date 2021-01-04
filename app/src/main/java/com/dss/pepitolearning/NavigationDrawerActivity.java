@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.dss.pepitolearning.api.APIProductGet;
 import com.dss.pepitolearning.models.Course;
@@ -29,6 +30,7 @@ import java.util.List;
 public class NavigationDrawerActivity extends AppCompatActivity {
 
     public static List<Course> carrito;
+    public static TextView userLoged;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -48,10 +50,16 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         initWindowColor();
         toolbar.setBackgroundResource(R.color.button_color);
         carrito = new ArrayList<>();
+        Bundle extras = getIntent().getExtras();
+
+
+
+
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.getHeaderView(0).findViewById(R.id.user_email_after_login);
 
 
 
@@ -67,6 +75,14 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        userLoged = navigationView.getHeaderView(0).findViewById(R.id.user_email_after_login);
+        System.out.println("Lo que me llega del intent");
+        System.out.println(extras);
+        System.out.println("Lo que tengo pa meter");
+        System.out.println(userLoged);
+        userLoged.setText(extras.getString("email_user"));
     }
 
     @Override
@@ -101,6 +117,8 @@ public class NavigationDrawerActivity extends AppCompatActivity {
         onBackPressed();
 
     }
+
+
 
     public static List<Course> operateShoppingCart(){
         return carrito;

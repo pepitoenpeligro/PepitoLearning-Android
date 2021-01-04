@@ -61,6 +61,7 @@ public class OneCartItemAdapter  extends RecyclerView.Adapter<OneCartItemAdapter
                 holder.animacion.setComposition(result);
                 holder.animacion.setVisibility(View.VISIBLE);
                 holder.animacion.playAnimation();
+                holder.animacion.setSpeed((float)0.95);
 
 
                 holder.animacion.addAnimatorListener(new Animator.AnimatorListener() {

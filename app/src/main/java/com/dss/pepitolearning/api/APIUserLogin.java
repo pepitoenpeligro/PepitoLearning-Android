@@ -171,7 +171,9 @@ public class APIUserLogin extends AsyncTask<Void, Void, Void> {
                             Intent goToHome = new Intent(activity, NavigationDrawerActivity.class);
                             goToHome.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                             AuthenticationActivity.clearEditTexts();
+                            goToHome.putExtra("email_user",email);
                             activity.startActivity(goToHome);
+
                         }
 
 

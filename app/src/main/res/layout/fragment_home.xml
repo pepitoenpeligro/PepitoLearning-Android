@@ -76,12 +76,13 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
 
-                android:text="Welcome Juan"
+                android:text="Welcome back"
                 android:textColor="#0D1333"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
 
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>
