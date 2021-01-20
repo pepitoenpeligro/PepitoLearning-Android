@@ -172,8 +172,7 @@
             android:layout_weight="1"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:id="@+id/shopping_cart_recicler_view"
-            ></androidx.recyclerview.widget.RecyclerView>
+            android:id="@+id/shopping_cart_recicler_view"/>
 
         <!--</ListView>-->
 

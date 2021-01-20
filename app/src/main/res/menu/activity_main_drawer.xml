@@ -21,6 +21,6 @@
             android:id="@+id/nav_google_maps"
             android:icon="@drawable/ic_baseline_where_to_vote_24"
             android:title="Location"
-            ></item>
+            />
     </group>
 </menu>

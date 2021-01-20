@@ -23,7 +23,7 @@
         app:lottie_fileName="24476-check.json"
         app:lottie_loop="false"
         tools:layout_editor_absoluteX="0p"
-        tools:layout_editor_absoluteY="72dp"></com.airbnb.lottie.LottieAnimationView>
+        tools:layout_editor_absoluteY="72dp"/>
 </RelativeLayout>
 
 
