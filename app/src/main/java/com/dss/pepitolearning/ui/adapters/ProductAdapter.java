@@ -37,42 +37,43 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
         this.courseList = courseList;
     }
 
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder{
+        TextView categoryName, totalCategory;
+        LottieAnimationView animacion;
+
+        public CategoryViewHolder(@NonNull View itemView) {
+            super(itemView);
+            categoryName = itemView.findViewById(R.id.course_name);
+            totalCategory = itemView.findViewById(R.id.total_course);
+            animacion = itemView.findViewById(R.id.course_lottie);
+        }
+    }
+
+
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.product_row_items, parent, false);
-
-
-        // now here we create a recyclerview row items.
         return new CategoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-
         holder.categoryName.setText(courseList.get(position).getCategoryName());
         holder.totalCategory.setText(courseList.get(position).getTotalCourses());
 
 
 
-        //Glide.with(context).load(categoryList.get(position).getImage()).into(holder.categoryImage);
-
-
-        LottieCompositionFactory.fromAsset(context.getApplicationContext(), courseList.get(position).getImage()).addListener(new LottieListener<LottieComposition>() {
+       LottieCompositionFactory.fromAsset(context.getApplicationContext(), courseList.get(position).getImage()).addListener(new LottieListener<LottieComposition>() {
             @Override
             public void onResult(LottieComposition result) {
-
-
-
                 holder.animacion.setComposition(result);
                 holder.animacion.setVisibility(View.VISIBLE);
                 holder.animacion.playAnimation();
 
-
                 holder.animacion.addAnimatorListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animator) {
-
                         holder.animacion.setVisibility(View.VISIBLE);
                     }
 
@@ -82,33 +83,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
                     }
 
                     @Override
-                    public void onAnimationCancel(Animator animator) {
-
-                    }
-
+                    public void onAnimationCancel(Animator animation) { }
                     @Override
-                    public void onAnimationRepeat(Animator animator) {
-
-                    }
+                    public void onAnimationRepeat(Animator animation) { }
                 });
-
-
             }
         });
-
-
-
-
-
-
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent goToOneProductDescription = new Intent(context, OneProductActivity.class);
-                System.out.println("Le paso a la siguiente actividad:");
+
                 System.out.println(courseList.get(position).getImage());
                 goToOneProductDescription.putExtra("animation_file_name",  courseList.get(position).getImage());
                 goToOneProductDescription.putExtra("product_parcelable",  courseList.get(position));
@@ -118,13 +104,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
 
                 Activity actividad = (Activity) context;
                 ActivityOptions op = ActivityOptions.makeSceneTransitionAnimation(actividad, pairs);
-
-
                 context.startActivity(goToOneProductDescription,op.toBundle());
-
             }
         });
-
     }
 
     @Override
@@ -132,22 +114,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Category
         return courseList.size();
     }
 
-    public static class CategoryViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView categoryImage;
-        TextView categoryName, totalCategory;
-        LottieAnimationView animacion;
-
-        public CategoryViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            //categoryImage = itemView.findViewById(R.id.course);
-            categoryName = itemView.findViewById(R.id.course_name);
-            totalCategory = itemView.findViewById(R.id.total_course);
-            animacion = itemView.findViewById(R.id.course_lottie);
-
-        }
-    }
 
 
 }

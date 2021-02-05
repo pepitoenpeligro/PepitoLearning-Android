@@ -62,6 +62,7 @@ public class APIProductGet extends AsyncTask<Void, Void, Void> {
     }
 
     public APIProductGet(HomeFragment c){
+
         this.listener = (APIProductGet.OnTaskCompleted) c;
     }
 
